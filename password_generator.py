@@ -5,14 +5,17 @@ numbers = "0123456789"
 special = "!#-_."
 chart = letters + numbers + special
 
-try:
-    length = int(input("Password length: "))
+def main():
+    length = int(input("Your password length: "))
     password = ""
     for _ in range(length):
-        password += random.choice(chart)
+        letter = random.choice(chart)
+        password += letter
     
-    print("This is your password: ")
+    print("This is your password:")
     print(password)
-except:
-    print("Not integer!")
+
+if __name__ == "__main__":
+    main()
+
 
