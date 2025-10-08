@@ -1,21 +1,31 @@
-import random
+import string
+import secrets
 
-letters = "abcdefghijklmnoupqrstvwxyzh"
-numbers = "0123456789"
-special = "!#-_."
-chart = letters + numbers + special
+chart = string.ascii_letters + string.digits + string.punctuation
 
 def main():
-    length = int(input("Your password length: "))
-    password = ""
-    for _ in range(length):
-        letter = random.choice(chart)
-        password += letter
-    
-    print("This is your password:")
-    print(password)
+    try:
+        while True:
+            length = int(input("Your password length: "))
+            if length < 6:
+                print("Too short password (min 6 characters)")
+            else: break
+
+        while True:
+            password = "".join(secrets.choice(chart) for i in range(length))
+            if (any(c.islower() for c in password)
+                and any(c.isupper() for c in password)
+                and any(c.isdigit() for c in password) >= 2):
+                break
+
+        print("This is your password:")
+        print(password)
+
+    except ValueError:
+        print("Not an integer")
 
 if __name__ == "__main__":
     main()
+
 
 
