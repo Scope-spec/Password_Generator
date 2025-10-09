@@ -3,29 +3,33 @@ import secrets
 
 chart = string.ascii_letters + string.digits + string.punctuation
 
-def main():
-    try:
-        while True:
-            length = int(input("Your password length: "))
+def user_input():
+    while True:
+        user_input = input("Your password length: ")
+
+        if user_input.isdigit():
+            length = int(user_input)
             if length < 6:
                 print("Too short password (min 6 characters)")
-            else: break
+            else:
+                return length
+        else: 
+            print("Not an integer. Please enter a whole number.")
 
-        while True:
-            password = "".join(secrets.choice(chart) for i in range(length))
-            if (any(c.islower() for c in password)
-                and any(c.isupper() for c in password)
-                and any(c.isdigit() for c in password) >= 2):
-                break
+def main(n):
+    while True:
+        password = "".join(secrets.choice(chart) for i in range(n))
+        if (any(c.islower() for c in password)
+            and any(c.isupper() for c in password)
+            and sum(c.isdigit() for c in password) >= 2):
+            break
 
-        print("This is your password:")
-        print(password)
+    print("This is your password:")
+    print(password)
 
-    except ValueError:
-        print("Not an integer")
 
 if __name__ == "__main__":
-    main()
-
+    u_input = user_input()
+    main(u_input)
 
 
